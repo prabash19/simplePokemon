@@ -1,0 +1,20 @@
+.navbarMain {
+  height: 50px;
+  width: 100%;
+  background-color: aqua;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+.linkButtons {
+  display: flex;
+}
+.linkButtons:hover {
+  cursor: pointer;
+}
+.isActiveLink {
+  background-color: brown;
+}
