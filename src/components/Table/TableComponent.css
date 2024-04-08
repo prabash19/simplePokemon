@@ -100,11 +100,17 @@
 
 .custom-pagination-link {
   display: inline-block;
-  padding: 0.25rem 0.5rem;
+  padding: 10px 30px 10px 30px;
   border: 1px solid #ccc;
   border-radius: 0.25rem;
-  color: #333;
+  font-size: medium;
+  color: white;
+  background-color: var(--secondary-color);
   text-decoration: none;
+  border-radius: 2em;
+}
+.custom-pagination-link :hover {
+  cursor: pointer;
 }
 
 .responsive-table th,

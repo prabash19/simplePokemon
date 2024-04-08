@@ -74,18 +74,18 @@ function Details() {
                 />
               </div>
               <div className="detailsRight">
-                <h2>Pokemon Name: &nbsp;&nbsp;{pokemonData?.name}</h2>
-                <h2>Pokemon Weight: &nbsp;&nbsp;{pokemonData?.weight}</h2>
-                <h2>Pokemon height: &nbsp;&nbsp;{pokemonData?.height}</h2>
+                <h2>Pokémon Name: &nbsp;&nbsp;{pokemonData?.name}</h2>
+                <h2>Pokémon Weight: &nbsp;&nbsp;{pokemonData?.weight}</h2>
+                <h2>Pokémon height: &nbsp;&nbsp;{pokemonData?.height}</h2>
                 <h2>
-                  Pokemon Experience: &nbsp;&nbsp;{pokemonData?.base_experience}
+                  Pokémon Experience: &nbsp;&nbsp;{pokemonData?.base_experience}
                 </h2>
                 <h2>
-                  Pokemon Ability: &nbsp;&nbsp;
+                  Pokémon Ability: &nbsp;&nbsp;
                   {pokemonData?.abilities[0].ability?.name}
                 </h2>
                 <h2>
-                  Pokemon Type: &nbsp;&nbsp;{pokemonData?.types[0].type?.name}
+                  Pokémon Type: &nbsp;&nbsp;{pokemonData?.types[0].type?.name}
                 </h2>
 
                 {savedPokemonID?.includes(pokemonData.id) ? (
