@@ -1,10 +1,11 @@
+import { useEffect, useState } from "react";
 import Navbar from "../navbar/Navbar";
 import {
   saveAsFavourites,
   getLocalStorageValue,
   removeFromFavourites,
 } from "../../helpers/localStorage";
-import { useEffect, useState } from "react";
+import TableComponent from "../Table/Table";
 function Home({ data, previousPage, nextPage, setCurrentPage }: any) {
   const [favs, setFavs] = useState<number[] | null>([]);
   const updateStorageValues = () => {
@@ -62,6 +63,7 @@ function Home({ data, previousPage, nextPage, setCurrentPage }: any) {
         >
           next
         </button>
+        <TableComponent heading="Pokédex" />
       </>
     </Navbar>
   );
