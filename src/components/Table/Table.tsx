@@ -14,12 +14,26 @@ const TableComponent = ({
   showAddButton,
   favs,
   setFavs,
+  startIndex,
 }: any) => {
   const navigate = useNavigate();
   const updateStorageValues = () => {
     setFavs(getLocalStorageValue());
   };
-
+  const handleNextPage = () => {
+    if (showAddButton == true) {
+      setCurrentPage(nextPage);
+    } else {
+      nextPage();
+    }
+  };
+  const handlePreviousPage = () => {
+    if (showAddButton == true) {
+      setCurrentPage(previousPage);
+    } else {
+      previousPage();
+    }
+  };
   return (
     <div className="main">
       <div className="table-heading">
@@ -40,7 +54,16 @@ const TableComponent = ({
           <tbody>
             {data?.map((item: any, index: number) => (
               <tr className="row-color" key={item.name}>
-                <td>{index + 1}</td>
+                {showAddButton == true ? (
+                  <>
+                    <td>{item.id}</td>
+                  </>
+                ) : (
+                  <>
+                    <td>{startIndex + index + 1}</td>
+                  </>
+                )}
+
                 <td>
                   <img
                     src={item?.sprites?.other?.home?.front_default}
@@ -100,36 +123,32 @@ const TableComponent = ({
             ))}
           </tbody>
         </table>
-        {showAddButton == true ? (
-          <div className="custom-pagination">
-            <ol className="custom-pagination-list">
-              <li>
-                <button
-                  className="custom-pagination-link"
-                  onClick={() => {
-                    setCurrentPage(previousPage);
-                  }}
-                >
-                  &lt;&nbsp; <span className="sr-only">Prev Page</span>
-                </button>
-              </li>
+        <div className="custom-pagination">
+          <ol className="custom-pagination-list">
+            <li>
+              <button
+                className="custom-pagination-link"
+                onClick={() => {
+                  handlePreviousPage();
+                }}
+              >
+                &lt;&nbsp; <span className="sr-only">Prev Page</span>
+              </button>
+            </li>
 
-              <li>
-                <button
-                  className="custom-pagination-link"
-                  onClick={() => {
-                    setCurrentPage(nextPage);
-                  }}
-                >
-                  <span className="sr-only">Next Page</span>
-                  &nbsp; &gt;
-                </button>
-              </li>
-            </ol>
-          </div>
-        ) : (
-          <></>
-        )}
+            <li>
+              <button
+                className="custom-pagination-link"
+                onClick={() => {
+                  handleNextPage();
+                }}
+              >
+                <span className="sr-only">Next Page</span>
+                &nbsp; &gt;
+              </button>
+            </li>
+          </ol>
+        </div>
       </div>
     </div>
   );

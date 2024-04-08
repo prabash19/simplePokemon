@@ -61,6 +61,8 @@ function Favourites() {
         setFavs={setFavs}
         previousPage={handlePreviousPage}
         nextPage={handleNextPage}
+        showAddButton={false}
+        startIndex={startIndex}
       />
     </Navbar>
   );
