@@ -38,9 +38,9 @@ const TableComponent = ({
             </tr>
           </thead>
           <tbody>
-            {data?.map((item: any) => (
+            {data?.map((item: any, index: number) => (
               <tr className="row-color" key={item.name}>
-                <td>{item?.id}</td>
+                <td>{index + 1}</td>
                 <td>
                   <img
                     src={item?.sprites?.other?.home?.front_default}
@@ -52,27 +52,34 @@ const TableComponent = ({
                 <td>{item?.name}</td>
                 <td>{item?.weight}</td>
                 <td>{item?.height}</td>
-                <td>
+                <td
+                  style={{
+                    justifyContent: "end",
+                    height: "auto",
+                  }}
+                >
                   {favs?.includes(item.id) ? (
                     <button
+                      className="deleteButton"
                       onClick={() => {
                         removeFromFavourites(item.id);
                         updateStorageValues();
                       }}
                     >
-                      remove
+                      Remove
                     </button>
                   ) : (
                     <>
                       {showAddButton == true ? (
                         <>
                           <button
+                            className="addButton"
                             onClick={() => {
                               saveAsFavourites(item.id);
                               updateStorageValues();
                             }}
                           >
-                            add
+                            Save
                           </button>
                         </>
                       ) : (
@@ -81,6 +88,7 @@ const TableComponent = ({
                     </>
                   )}
                   <button
+                    className="detailsButton"
                     onClick={() => {
                       navigate(`/details/${item.id}`);
                     }}

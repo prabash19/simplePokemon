@@ -5,7 +5,7 @@
   align-items: center;
   background-color: var(--secondary-color);
   color: white;
-  height: 40px;
+  height: 45px;
   border-top-left-radius: 1em;
   border-top-right-radius: 1em;
 }
@@ -19,6 +19,63 @@
 .responsive-table {
   width: 100%;
   border-collapse: collapse;
+}
+
+.addButton {
+  padding: 10px 30px 10px 30px;
+  background-color: var(--secondary-color);
+  color: white;
+  margin-left: 30px;
+  margin-right: 30px;
+  border-radius: 5em;
+  border: solid #3d2462;
+  border-width: 1px;
+  transition: all 0.5s;
+  width: 110px;
+}
+.addButton:hover {
+  border: solid #3d2462;
+  border-width: 1px;
+  background-color: white;
+  color: #3d2462;
+  cursor: pointer;
+}
+.deleteButton {
+  padding: 10px 30px 10px 30px;
+  background-color: red;
+  color: #ffffff;
+  border-radius: 5em;
+  margin-right: 30px;
+  border: solid #3d2462;
+  border-width: 1px;
+  transition: all 0.5s;
+  width: 110px;
+}
+.deleteButton:hover {
+  border: solid #3d2462;
+  border-width: 1px;
+  background-color: white;
+  color: red;
+  cursor: pointer;
+}
+.detailsButton {
+  width: 140px;
+  padding: 10px 30px 10px 30px;
+  background-color: white;
+  color: var(--secondary-color);
+  margin-left: 30px;
+  margin-right: 30px;
+  border-radius: 5em;
+  border: solid #3d2462;
+  border-width: 1px;
+  transition: all 0.5s;
+}
+.detailsButton:hover {
+  border: solid #3d2462;
+  border-width: 1px;
+  color: white;
+  background-color: var(--secondary-color);
+  cursor: pointer;
 }
 .custom-pagination {
   display: flex;
