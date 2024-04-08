@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./components/home/Home";
 import Favourites from "./components/favourites/Favourites";
 import NotFound from "./helpers/NotFound";
+import Details from "./components/details/Details";
 import "./App.css";
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/favourites" element={<Favourites />} />
+          <Route path="/details/:id" element={<Details />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

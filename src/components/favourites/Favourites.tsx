@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Navbar from "../navbar/Navbar";
 import { getLocalStorageValue } from "../../helpers/localStorage";
-import { baseUrl } from "../../helpers/baseUrl";
+import { baseUrl } from "../../constants/baseUrl";
 import TableComponent from "../Table/Table";
 
 function Favourites() {

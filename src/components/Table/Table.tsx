@@ -4,6 +4,7 @@ import {
   getLocalStorageValue,
   removeFromFavourites,
 } from "../../helpers/localStorage";
+import { useNavigate } from "react-router-dom";
 const TableComponent = ({
   heading,
   data,
@@ -14,6 +15,7 @@ const TableComponent = ({
   favs,
   setFavs,
 }: any) => {
+  const navigate = useNavigate();
   const updateStorageValues = () => {
     setFavs(getLocalStorageValue());
   };
@@ -27,6 +29,8 @@ const TableComponent = ({
         <table className="responsive-table">
           <thead>
             <tr>
+              <th>SN</th>
+              <th>Image</th>
               <th>Name</th>
               <th>Weight</th>
               <th>Height</th>
@@ -36,6 +40,15 @@ const TableComponent = ({
           <tbody>
             {data?.map((item: any) => (
               <tr className="row-color" key={item.name}>
+                <td>{item?.id}</td>
+                <td>
+                  <img
+                    src={item?.sprites?.other?.home?.front_default}
+                    height={50}
+                    width={50}
+                    alt="Pokemon image"
+                  ></img>
+                </td>
                 <td>{item?.name}</td>
                 <td>{item?.weight}</td>
                 <td>{item?.height}</td>
@@ -67,6 +80,13 @@ const TableComponent = ({
                       )}
                     </>
                   )}
+                  <button
+                    onClick={() => {
+                      navigate(`/details/${item.id}`);
+                    }}
+                  >
+                    View Details
+                  </button>
                 </td>
               </tr>
             ))}
