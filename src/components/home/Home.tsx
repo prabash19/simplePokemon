@@ -5,6 +5,7 @@ import axios from "axios";
 import { baseUrl } from "../../constants/baseUrl";
 import { getLocalStorageValue } from "../../helpers/localStorage";
 import { PokemonData } from "../../constants/pokemonType";
+import LoadingScreen from "../../helpers/LoadingScreen/LoadingScreen";
 function Home() {
   const [loading, setLoading] = useState(true);
   const [pokemonData, setPokemonData] = useState<PokemonData[]>([]);
@@ -44,16 +45,24 @@ function Home() {
   }, []);
   return (
     <Navbar>
-      <TableComponent
-        heading="Pokédex"
-        data={pokemonData}
-        setCurrentPage={setCurrentPage}
-        previousPage={previousPage}
-        nextPage={nextPage}
-        showAddButton={true}
-        savedPokemonID={savedPokemonID}
-        setsavedPokemonID={setsavedPokemonID}
-      />
+      {loading ? (
+        <>
+          <LoadingScreen />
+        </>
+      ) : (
+        <>
+          <TableComponent
+            heading="Pokédex"
+            data={pokemonData}
+            setCurrentPage={setCurrentPage}
+            previousPage={previousPage}
+            nextPage={nextPage}
+            showAddButton={true}
+            savedPokemonID={savedPokemonID}
+            setsavedPokemonID={setsavedPokemonID}
+          />
+        </>
+      )}
     </Navbar>
   );
 }

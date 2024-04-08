@@ -5,8 +5,10 @@ import { getLocalStorageValue } from "../../helpers/localStorage";
 import { baseUrl } from "../../constants/baseUrl";
 import TableComponent from "../table/Table";
 import { PokemonData } from "../../constants/pokemonType";
+import LoadingScreen from "../../helpers/LoadingScreen/LoadingScreen";
 
 function Favourites() {
+  const [loading, setLoading] = useState(true);
   const [pokemonData, setPokemonData] = useState<PokemonData[]>([]);
   const [savedPokemonID, setsavedPokemonID] = useState<number[] | []>([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -31,6 +33,7 @@ function Favourites() {
   }, []);
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       if (savedPokemonID != null) {
         const promises = savedPokemonID.map(async (id) => {
           const response = await axios.get(`${baseUrl}${id}/`);
@@ -39,6 +42,7 @@ function Favourites() {
         Promise.all(promises)
           .then((data) => {
             setPokemonData(data);
+            setLoading(false);
           })
           .catch((error) => {
             console.error("Error fetching data:", error);
@@ -47,20 +51,27 @@ function Favourites() {
     };
     fetchData();
   }, [savedPokemonID]);
-  console.log("Start here is", startIndex);
   return (
     <Navbar>
-      {pokemonData && (
-        <TableComponent
-          heading={"Favourites"}
-          data={paginatedData}
-          savedPokemonID={savedPokemonID}
-          setsavedPokemonID={setsavedPokemonID}
-          handlePreviousPage={handlePreviousPage}
-          handleNextPage={handleNextPage}
-          showAddButton={false}
-          startIndex={startIndex}
-        />
+      {loading ? (
+        <>
+          <LoadingScreen />
+        </>
+      ) : (
+        <>
+          {pokemonData && (
+            <TableComponent
+              heading={"Favourites"}
+              data={paginatedData}
+              savedPokemonID={savedPokemonID}
+              setsavedPokemonID={setsavedPokemonID}
+              handlePreviousPage={handlePreviousPage}
+              handleNextPage={handleNextPage}
+              showAddButton={false}
+              startIndex={startIndex}
+            />
+          )}
+        </>
       )}
     </Navbar>
   );

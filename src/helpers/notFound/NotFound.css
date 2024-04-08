@@ -1,0 +1,32 @@
+.notFoundContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.notFoundMain {
+  text-align: center;
+}
+.notFoundMain h1 {
+  font-size: 6rem;
+  margin: 0;
+}
+.notFoundMain p {
+  font-size: 1.5rem;
+}
+
+.notFoundMain a {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.notFoundMain a:hover {
+  background-color: #0056b3;
+}

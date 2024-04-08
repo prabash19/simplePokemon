@@ -13,7 +13,7 @@ import {
 } from "../../helpers/localStorage";
 function Details() {
   const { id } = useParams();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
   const [pokemonData, setPokemonData] = useState<PokemonData | null>();
   const [savedPokemonID, setsavedPokemonID] = useState<number[] | null>([]);
   useEffect(() => {

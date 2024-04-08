@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./components/home/Home";
 import Favourites from "./components/favourites/Favourites";
-import NotFound from "./helpers/NotFound";
+import NotFound from "./helpers/notFound/NotFound";
 import Details from "./components/details/Details";
 import "./App.css";
 
