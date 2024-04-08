@@ -7,23 +7,34 @@ interface NavbarProps {
 function Navbar({ children }: NavbarProps) {
   const path: string = window.location.pathname;
   return (
-    <div>
+    <>
       <div className="navbarMain">
-        <div>logo</div>
+        <a href="/">
+          <img src="/logo.png" height={140} width={150} alt="Logo"></img>
+        </a>
         <div className="linkButtons">
-          <Link to="/" className={path == "/" ? "isActiveLink" : "linkStyle"}>
-            Home
-          </Link>
-          <Link
-            to="/favourites"
-            className={path == "/favourites" ? "isActiveLink" : "linkStyle"}
-          >
-            favourites
-          </Link>
+          <div className="linkButtonStyles">
+            <Link
+              to="/"
+              className={path === "/" ? "isActiveLink" : "removeTextDecoration"}
+            >
+              Home
+            </Link>
+          </div>
+          <div className="linkButtonStyles">
+            <Link
+              to="/favourites"
+              className={
+                path === "/favourites" ? "isActiveLink" : "removeTextDecoration"
+              }
+            >
+              Favourites
+            </Link>
+          </div>
         </div>
       </div>
       <div>{children}</div>
-    </div>
+    </>
   );
 }
 

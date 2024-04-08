@@ -3,7 +3,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: green;
+  background-color: var(--secondary-color);
+  color: white;
+  height: 40px;
   border-top-left-radius: 1em;
   border-top-right-radius: 1em;
 }
@@ -55,10 +57,11 @@
   text-align: left;
 }
 .row-color:nth-child(odd) {
-  background-color: blue;
+  background-color: var(--main-gray);
 }
 .responsive-table tbody tr:hover {
-  background-color: lightblue;
+  background-color: var(--secondary-gray);
+  cursor: pointer;
 }
 /* Make table responsive */
 @media screen and (max-width: 600px) {

@@ -3,7 +3,7 @@ import axios from "axios";
 import Navbar from "../navbar/Navbar";
 import { getLocalStorageValue } from "../../helpers/localStorage";
 import { baseUrl } from "../../constants/baseUrl";
-import TableComponent from "../Table/Table";
+import TableComponent from "../table/Table";
 
 function Favourites() {
   const [pokemonData, setPokemonData] = useState<number[] | null>([]);

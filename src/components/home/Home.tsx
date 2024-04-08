@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Navbar from "../navbar/Navbar";
-import TableComponent from "../Table/Table";
+import TableComponent from "../table/Table";
 import axios from "axios";
 import { baseUrl } from "../../constants/baseUrl";
 import { getLocalStorageValue } from "../../helpers/localStorage";
