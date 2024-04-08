@@ -5,7 +5,7 @@ export const getLocalStorageValue = () => {
     savedIdsArray = JSON.parse(savedIds);
     return savedIdsArray;
   } else {
-    return null;
+    return [];
   }
 };
 export const saveAsFavourites = (number: number) => {

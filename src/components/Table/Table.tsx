@@ -5,35 +5,43 @@ import {
   removeFromFavourites,
 } from "../../helpers/localStorage";
 import { useNavigate } from "react-router-dom";
+import { PokemonData } from "../../constants/pokemonType";
+import { TableComponentProps } from "../../constants/pokemonType";
+
 const TableComponent = ({
   heading,
   data,
-  setCurrentPage,
+  savedPokemonID,
+  showAddButton,
+  startIndex,
   previousPage,
   nextPage,
-  showAddButton,
-  favs,
-  setFavs,
-  startIndex,
-}: any) => {
+  setsavedPokemonID,
+  handlePreviousPage,
+  handleNextPage,
+  setCurrentPage,
+}: TableComponentProps) => {
   const navigate = useNavigate();
   const updateStorageValues = () => {
-    setFavs(getLocalStorageValue());
+    setsavedPokemonID(getLocalStorageValue());
   };
-  const handleNextPage = () => {
-    if (showAddButton == true) {
+  const handleNextPageMutiple = () => {
+    if (showAddButton == true && setCurrentPage && nextPage) {
       setCurrentPage(nextPage);
+    } else if (handleNextPage) {
+      handleNextPage();
     } else {
-      nextPage();
     }
   };
-  const handlePreviousPage = () => {
-    if (showAddButton == true) {
+  const handlePreviousPageMultiple = () => {
+    if (showAddButton == true && setCurrentPage && previousPage) {
       setCurrentPage(previousPage);
+    } else if (handlePreviousPage) {
+      handlePreviousPage();
     } else {
-      previousPage();
     }
   };
+  console.log("start index is", startIndex);
   return (
     <div className="main">
       <div className="table-heading">
@@ -52,7 +60,7 @@ const TableComponent = ({
             </tr>
           </thead>
           <tbody>
-            {data?.map((item: any, index: number) => (
+            {data?.map((item: PokemonData, index: number) => (
               <tr className="row-color" key={item.name}>
                 {showAddButton == true ? (
                   <>
@@ -60,13 +68,15 @@ const TableComponent = ({
                   </>
                 ) : (
                   <>
-                    <td>{startIndex + index + 1}</td>
+                    {startIndex != undefined && (
+                      <td>{startIndex + index + 1}</td>
+                    )}
                   </>
                 )}
 
                 <td>
                   <img
-                    src={item?.sprites?.other?.home?.front_default}
+                    src={item?.sprites?.front_default}
                     height={50}
                     width={50}
                     alt="Pokemon image"
@@ -81,7 +91,8 @@ const TableComponent = ({
                     height: "auto",
                   }}
                 >
-                  {favs?.includes(item.id) ? (
+                  {savedPokemonID.length > 0 &&
+                  savedPokemonID?.includes(item.id) ? (
                     <button
                       className="deleteButton"
                       onClick={() => {
@@ -129,7 +140,7 @@ const TableComponent = ({
               <button
                 className="custom-pagination-link"
                 onClick={() => {
-                  handlePreviousPage();
+                  handlePreviousPageMultiple();
                 }}
               >
                 &lt;&nbsp; <span className="sr-only">Prev Page</span>
@@ -140,7 +151,7 @@ const TableComponent = ({
               <button
                 className="custom-pagination-link"
                 onClick={() => {
-                  handleNextPage();
+                  handleNextPageMutiple();
                 }}
               >
                 <span className="sr-only">Next Page</span>

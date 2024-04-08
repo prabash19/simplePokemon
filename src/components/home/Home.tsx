@@ -4,13 +4,14 @@ import TableComponent from "../table/Table";
 import axios from "axios";
 import { baseUrl } from "../../constants/baseUrl";
 import { getLocalStorageValue } from "../../helpers/localStorage";
+import { PokemonData } from "../../constants/pokemonType";
 function Home() {
   const [loading, setLoading] = useState(true);
-  const [pokemonData, setPokemonData] = useState();
+  const [pokemonData, setPokemonData] = useState<PokemonData[]>([]);
   const [currentPage, setCurrentPage] = useState(baseUrl);
   const [previousPage, setPreviousPage] = useState<null | string>(null);
   const [nextPage, setNextPage] = useState<null | string>(null);
-  const [favs, setFavs] = useState<number[] | null>([]);
+  const [savedPokemonID, setsavedPokemonID] = useState<number[] | []>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,7 +40,7 @@ function Home() {
     fetchData();
   }, [currentPage]);
   useEffect(() => {
-    setFavs(getLocalStorageValue());
+    setsavedPokemonID(getLocalStorageValue());
   }, []);
   return (
     <Navbar>
@@ -50,8 +51,8 @@ function Home() {
         previousPage={previousPage}
         nextPage={nextPage}
         showAddButton={true}
-        favs={favs}
-        setFavs={setFavs}
+        savedPokemonID={savedPokemonID}
+        setsavedPokemonID={setsavedPokemonID}
       />
     </Navbar>
   );

@@ -15,9 +15,9 @@ function Details() {
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [pokemonData, setPokemonData] = useState<PokemonData | null>();
-  const [favs, setFavs] = useState<number[] | null>([]);
+  const [savedPokemonID, setsavedPokemonID] = useState<number[] | null>([]);
   useEffect(() => {
-    setFavs(getLocalStorageValue());
+    setsavedPokemonID(getLocalStorageValue());
   }, []);
   useEffect(() => {
     const fetchData = async () => {
@@ -53,9 +53,8 @@ function Details() {
     fetchData();
   }, []);
   const updateStorageValues = () => {
-    setFavs(getLocalStorageValue());
+    setsavedPokemonID(getLocalStorageValue());
   };
-  console.log("data is", pokemonData);
   return (
     <Navbar>
       {loading ? (
@@ -89,7 +88,7 @@ function Details() {
                   Pokemon Type: &nbsp;&nbsp;{pokemonData?.types[0].type?.name}
                 </h2>
 
-                {favs?.includes(pokemonData.id) ? (
+                {savedPokemonID?.includes(pokemonData.id) ? (
                   <button
                     className="deleteButton"
                     onClick={() => {
