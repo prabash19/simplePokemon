@@ -1,70 +1,58 @@
 import { useEffect, useState } from "react";
 import Navbar from "../navbar/Navbar";
-import {
-  saveAsFavourites,
-  getLocalStorageValue,
-  removeFromFavourites,
-} from "../../helpers/localStorage";
 import TableComponent from "../Table/Table";
-function Home({ data, previousPage, nextPage, setCurrentPage }: any) {
+import axios from "axios";
+import { baseUrl } from "../../helpers/baseUrl";
+import { getLocalStorageValue } from "../../helpers/localStorage";
+function Home() {
+  const [loading, setLoading] = useState(true);
+  const [pokemonData, setPokemonData] = useState();
+  const [currentPage, setCurrentPage] = useState(baseUrl);
+  const [previousPage, setPreviousPage] = useState<null | string>(null);
+  const [nextPage, setNextPage] = useState<null | string>(null);
   const [favs, setFavs] = useState<number[] | null>([]);
-  const updateStorageValues = () => {
-    setFavs(getLocalStorageValue());
-  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.get(currentPage);
+        const data = response.data;
+        const results = data.results;
+        const promises = results.map(async (pokemon: any) => {
+          const pokemonResponse = await axios.get(pokemon.url);
+          const pokemonData = pokemonResponse.data;
+          return {
+            ...pokemon,
+            ...pokemonData,
+          };
+        });
+        const mergedPokemonData: any = await Promise.all(promises);
+        setPokemonData(mergedPokemonData);
+        setPreviousPage(data.previous);
+        setNextPage(data.next);
+        setLoading(false);
+      } catch (error) {
+        console.log("error", error);
+      }
+    };
+    fetchData();
+  }, [currentPage]);
   useEffect(() => {
     setFavs(getLocalStorageValue());
   }, []);
-  console.log("favs is", favs);
   return (
     <Navbar>
-      <>
-        <ul style={{ listStyleType: "none" }}>
-          {data.map((item: any) => (
-            <div style={{ display: "flex" }} key={item.name}>
-              name: <li>{item.name}</li>
-              weight: <li>{item.weight}</li>
-              id:<li>{item.id}</li>
-              {favs?.includes(item.id) ? (
-                <button
-                  onClick={() => {
-                    removeFromFavourites(item.id);
-                    updateStorageValues();
-                  }}
-                >
-                  remove
-                </button>
-              ) : (
-                <>
-                  <button
-                    onClick={() => {
-                      saveAsFavourites(item.id);
-                      updateStorageValues();
-                    }}
-                  >
-                    add
-                  </button>
-                </>
-              )}
-            </div>
-          ))}
-        </ul>
-        <button
-          onClick={() => {
-            setCurrentPage(previousPage);
-            updateStorageValues();
-          }}
-        >
-          back
-        </button>
-        <button
-          onClick={() => {
-            setCurrentPage(nextPage);
-          }}
-        >
-          next
-        </button>
-        <TableComponent heading="Pokédex" />
-      </>
+      <TableComponent
+        heading="Pokédex"
+        data={pokemonData}
+        setCurrentPage={setCurrentPage}
+        previousPage={previousPage}
+        nextPage={nextPage}
+        showAddButton={true}
+        favs={favs}
+        setFavs={setFavs}
+      />
     </Navbar>
   );
 }
